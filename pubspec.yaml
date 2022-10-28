@@ -1,7 +1,7 @@
 name: janus
-description: A new Flutter package project.
-version: 0.1.0
-homepage:
+description: Janus simplifies local storage of data with encryption
+version: 0.1.1
+homepage: https://github.com/raul94a/janus
 
 environment:
   sdk: '>=2.18.1 <3.0.0'

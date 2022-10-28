@@ -1,18 +1,8 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+Janus provide an easy API to persist models in the local storage with encryption.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+CAPTION: Not working in Flutter Web
 
 ## Features
 
@@ -31,7 +21,7 @@ Using this package is pretty straightforward. The following examples will store 
             this.fontSize = 15.0,
             this.firstLoading = true,
             this.shoppingCartProducts = const []})
-             : super({cypher: true});
+             : super(cypher: true);
     }
 
         final String token;
@@ -84,44 +74,57 @@ The apis folder will bear the classes that will provide access to your webservic
 
 ```dart
 //apis/user_model.dart
-class User{
-    final String id;
-    final String email;
 
-    Map<String,dynamic> toMap() => {
-        'id': id,
-        'email': email
+class User {
+  final String id;
+  final String name;
+  final String email;
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'email': email,
     };
+  }
 
-    factory User.fromMap(Map<String,dynamic> map) => User(id: map['id'], email: map['email']);
-}
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      id: map['id']  ?? '',
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+    );
 
 //apis/user_storage.dart
-class UserStorage extends Janus{
-    const UserStorage() : super({cypher:true});
-    //janus will provide the load and save methods!
 
-    //obviusly, you can register any needed method here
+class UserStorage extends Janus{
+  UserStorage() : super(cypher: true);
+
+  
 }
 
 //repositories/user_storage_repository.dart
-class UserStorageRepository{
+class UserRepo {
+  final api = UserStorage();
 
-    final api = UserStorage();
+  Future<void> save(User user)async{
+    await api.save(user.toMap());
+    
+  }
 
-    //this is only an example
-    Future<void> save(User user)async{
-        await api.save(user.toMap());
-    }
-    Future<User> load() async {
-        return await User.fromMap(await api.load());
-    }
-
+  Future<User> load() async{
+    return User.fromMap(await api.load());
+  }
 }
 
 //Now you can use the repository to persist the user in you local memory or to load it from local.
-final userRepository = UserStorageRepository();
-final User user = User(id: 'uuid', email: 'myemail@address.com');
+final userRepository = UserRepo();
+final User user = User(id: 'uuid', name:'name',email: 'myemail@address.com');
 await userRepository.save(user);
 
 final loadedUser = await userRepository.load();
