@@ -1,6 +1,6 @@
 name: janus
-description: Janus simplifies local storage of data with encryption
-version: 0.1.1
+description: Janus is an easy to use package that simplifies the local storage of your models with encryption.
+version: 0.1.2
 homepage: https://github.com/raul94a/janus
 
 environment:
