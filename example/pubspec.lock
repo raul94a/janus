@@ -72,7 +72,7 @@ packages:
     source: hosted
     version: "1.0.5"
   encrypt:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: encrypt
       url: "https://pub.dartlang.org"
@@ -116,6 +116,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  janus:
+    dependency: "direct main"
+    description:
+      name: janus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   js:
     dependency: transitive
     description:
@@ -152,14 +159,14 @@ packages:
     source: hosted
     version: "1.8.0"
   path:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
   path_provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path_provider
       url: "https://pub.dartlang.org"

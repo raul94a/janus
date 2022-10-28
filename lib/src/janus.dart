@@ -56,7 +56,6 @@ abstract class Janus extends Cypher {
     cachedFile!.writeAsStringSync(json);
   }
 
-
   Future<void> saveCache() => _saveCache();
   String? get filecache => cachedFile?.path;
 }
